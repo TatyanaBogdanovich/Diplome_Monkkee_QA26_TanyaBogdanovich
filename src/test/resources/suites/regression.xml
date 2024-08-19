@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test" parallel="tests" thread-count="2">
+    <test name="Test2">
+        <parameter name="browserName" value="chrome"/>
+        <groups>
+            <run>
+                <include name="regression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="tests.ChangePasswordTest"/>
+            <class name="tests.FilterEntriesDataTest"/>
+        </classes>
+    </test>
+</suite>
