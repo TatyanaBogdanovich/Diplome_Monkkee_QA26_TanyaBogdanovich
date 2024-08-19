@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Smoke test" parallel="classes" thread-count="1">
+<suite name="Smoke test" parallel="tests" thread-count="1">
     <test name="Test on chrome">
         <parameter name="browserName" value="chrome"/>
         <groups>
