@@ -6,7 +6,10 @@ import utils.PropertyReader;
 
 public class EditEntryTest extends BaseTest {
 
-    @Test(groups = "negative", description = "Редактировать запись")
+    public static String LINK_ENTRY = "https://m.realt.by/news/article/40463/";
+    public static String DISPLAY_TEXT = "Ссылка на статью. ";
+
+    @Test(groups = "smoke", description = "Редактировать запись")
     public void editEntryTest() {
 
         loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
@@ -24,5 +27,3 @@ public class EditEntryTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getCheckEntry(), DISPLAY_TEXT + firstText);
     }
 }
-
-

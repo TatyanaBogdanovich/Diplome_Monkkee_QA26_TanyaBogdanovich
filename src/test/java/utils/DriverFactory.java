@@ -12,7 +12,7 @@ public class DriverFactory {
     public static WebDriver getDriver(String browserName) throws Exception {
         WebDriver driver;
         switch (browserName) {
-            case "chrome":
+            case "chrome" -> {
                 ChromeOptions options = new ChromeOptions();
                 //options.addArguments("--headless");
                 options.addArguments("--disable-extensions");
@@ -20,18 +20,17 @@ public class DriverFactory {
                 options.addArguments("--disable-popup-blocking");
                 options.addArguments("--disable-notifications");
                 driver = new ChromeDriver(options);
-                break;
-            case "edge":
-                EdgeOptions options1 = new EdgeOptions();
-                //options1.addArguments("--headless");
-                options1.addArguments("--disable-extensions");
-                options1.addArguments("--disable-infobars");
-                options1.addArguments("--disable-popup-blocking");
-                options1.addArguments("--disable-notifications");
-                driver = new EdgeDriver(options1);
-                break;
-            default:
-                throw new Exception("Unsupported browser");
+            }
+            case "edge"-> {
+                EdgeOptions options = new EdgeOptions();
+                //options.addArguments("--headless");
+                options.addArguments("--disable-extensions");
+                options.addArguments("--disable-infobars");
+                options.addArguments("--disable-popup-blocking");
+                options.addArguments("--disable-notifications");
+                driver = new EdgeDriver(options);
+            }
+            default -> throw new  Exception("Unexpected value: " + browserName);
         }
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

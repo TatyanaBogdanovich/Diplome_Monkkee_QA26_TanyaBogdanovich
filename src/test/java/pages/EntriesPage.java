@@ -5,14 +5,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static tests.BaseTest.DISPLAY_TEXT;
+import java.time.Duration;
 
 public class EntriesPage extends BasePage {
 
     public static final By ENTER_TEXT_INPUT = By.id("editable");
     public static final By HOME_BUTTON = By.id("back-to-overview");
     public static final By DELETE_BUTTON = By.id("delete-entry");
-    public static final By EDIT_TABLE = By.id("editable");
     public static final By ADD_IMAGE_BUTTON = By.xpath("//a[contains(@class, 'button__image')]");
     public static final By SELECT_FILE_BUTTON = By.xpath("//input[@name='txtUpload']");
     public static final By URL_IMAGE = By.xpath("//input[contains(@class,'dialog_ui_input_text')]");
@@ -28,77 +27,86 @@ public class EntriesPage extends BasePage {
     }
 
     @Step("Ввести текст в таблицу")
-    public void setEnterTextInput(String enterTextInput) {
+    public EntriesPage setEnterTextInput(String enterTextInput) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_IMAGE_BUTTON));
         driver.findElement(ENTER_TEXT_INPUT).sendKeys(enterTextInput);
+        return this;
     }
 
     @Step("Нажать кнопку HOME")
-    public void clickHomeButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_IMAGE_BUTTON));
+    public EntriesPage clickHomeButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(HOME_BUTTON));
         driver.findElement(HOME_BUTTON).click();
+        return this;
     }
 
     @Step("Редактировать текст записи")
-    public void clickEditEntryTable() {
-        driver.findElement(EDIT_TABLE).click();
+    public EntriesPage clickEditEntryTable() {
+        driver.findElement(ENTER_TEXT_INPUT).click();
+        return this;
     }
 
     @Step("Нажать кнопку Image")
-    public void clickImageButton() {
+    public EntriesPage clickImageButton() {
         driver.findElement(ADD_IMAGE_BUTTON).click();
+        return this;
     }
 
     @Step("Ввести ссылку  картинки")
-    public void setUrlImage(String urlImage) {
+    public EntriesPage setUrlImage(String urlImage) {
         driver.findElement(URL_IMAGE).sendKeys(urlImage);
+        return this;
     }
 
     @Step("Выбрать картинку из файла")
-    public void setSelectFile(String pathImage) throws InterruptedException {
+    public EntriesPage setSelectFile(String pathImage) {
         driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
         driver.findElement(SELECT_FILE_BUTTON).sendKeys(pathImage);
-        Thread.sleep(3000); // решения для загрузки пути картинки
-        driver.switchTo().defaultContent(); //возвращает обратно
-        // Временное решение, которое должно быть заменено , на появленеие текста в поле URL
-        Thread.sleep(3000);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.switchTo().defaultContent();
+        return this;
     }
 
     @Step("Нажать кнопку OK")
-    public void clickUploadButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(URL_IMAGE));
+    public EntriesPage clickUploadButton() {
         driver.findElement(UPLOAD_BUTTON_OK).click();
-
+        return this;
     }
 
     @Step("Нажать кнопку развернуть панель инструментов")
-    public void clickExpandToolbarButton() {
+    public EntriesPage clickExpandToolbarButton() {
         driver.findElement(EXPAND_TOOLBAR_BUTTON).click();
+        return this;
     }
 
     @Step("Нажать кнопку Ссылка")
-    public void clickArticleLinkButton() {
+    public EntriesPage clickArticleLinkButton() {
         driver.findElement(ARTICLE_LINK_BUTTON).click();
+        return this;
     }
 
     @Step("Ввести название ссылки")
-    public void setAddNameLinkInput(String displayText) {
+    public EntriesPage setAddNameLinkInput(String displayText) {
         driver.findElement(DISPLAY_TEXT_INPUT).sendKeys(displayText);
+        return this;
     }
 
     @Step("Ввести  ссылку на статью")
-    public void setArticleLinkInput(String linkEntry) {
+    public EntriesPage setArticleLinkInput(String linkEntry) {
         driver.findElement(URL_ARTICLE_INPUT).sendKeys(linkEntry);
+        return this;
     }
 
     @Step("Нажать кнопку OK")
-    public void clickOkLinkButton() {
+    public EntriesPage clickOkLinkButton() {
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(OK_LINK_BUTTON).click();
+        return this;
     }
 
     @Step("Нажать кнопку Удалить")
-    public void clickDeleteButton() {
+    public EntriesPage clickDeleteButton() {
         driver.findElement(DELETE_BUTTON).click();
+        return this;
     }
 }
-

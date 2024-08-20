@@ -14,8 +14,9 @@ public class SettingsPage extends BasePage {
     public static final By NEW_PASSWORD = By.xpath("//*[@id='password']");
     public static final By REPEAT_PASSWORD = By.xpath("//*[@id='password-confirmation']");
     public static final By HINT_PASSWORD = By.xpath("//*[@id='password-hint']");
-    public static final By SAVE_BUTTON = By.xpath("//*[@id='settings-content']/div/form/div[7]/div/button");
-    public static final By SUCCESS_MASSAGE = By.xpath("//*[@id='settings-content']/div/div/div");
+    public static final By SAVE_BUTTON = By.xpath("//button[@class='btn btn-default']");
+    public static final By SUCCESS_MASSAGE = By.xpath(" //div[@class='alert alert-success']");
+    public static final By LOGOUT_BUTTON = By.xpath("//button[@class = 'user-menu__btn']");
 
     public SettingsPage(WebDriver driver) {
         super(driver);
@@ -83,5 +84,10 @@ public class SettingsPage extends BasePage {
     public boolean isSuccessMessage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESS_MASSAGE));
         return driver.findElement(SUCCESS_MASSAGE).isDisplayed();
+    }
+    @Step ("Нажать кнопку Logout")
+    public LoginPage clickLogoutButton() {
+        driver.findElement(LOGOUT_BUTTON).click();
+        return new LoginPage(driver);
     }
 }

@@ -21,21 +21,18 @@ public abstract class BasePage {
     }
 
     @Step("alert")
-    public String getAlertText() { //возвращает текст алерта
+    //возвращает текст алерта
+    public String getAlertText() {
         return driver.switchTo().alert().getText();
     }
 
     @Step("closeAlert")
-    public void acceptAlert() {     //закрываем алерт кнопкой ОК, если алерт существует, если алерт отстув. ничего не делаем
-        boolean foundAlert = false;
+    //закрываем алерт кнопкой ОК, если алерт существует, если алерт отстув. ничего не делаем
+    public void acceptAlert() {
         try {
             wait.until(ExpectedConditions.alertIsPresent());
-            foundAlert = true;
-        } catch (TimeoutException ignored) {
-        }
-        if (foundAlert) {
             driver.switchTo().alert().accept();
+        } catch (TimeoutException ignored) {
         }
     }
 }
-

@@ -6,23 +6,25 @@ import utils.PropertyReader;
 
 public class FilterEntriesDataTest extends BaseTest {
 
+    public static String DATE_VALUE = "16/15/2024";
+
     @Test(groups = "regression", description = "Установить фильтр записей по дате")
-    public void positiveFilterDateTest() throws InterruptedException {
+    public void positiveFilterDateTest() {
         loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickSelectDate();
-        dashboardPage.clickSelectDay();
-        dashboardPage.getEntriesDate(CHECK_DATE);
-        dashboardPage.clickResetFilter();
-        Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+        dashboardPage.clickSelectDate()
+                .clickSelectDay()
+                .getEntriesDate()
+                .clickResetFilter();
+                Assert.assertTrue(dashboardPage.isDashboardDisplayed());
     }
 
     @Test(groups = "negative", description = "Установить невалидную дату в фильтр")
-    public void negativeFilterDateTest() throws InterruptedException {
+    public void negativeFilterDateTest() {
         loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickSelectDate();
-        dashboardPage.setDateValue(DATE_VALUE);
+        dashboardPage.clickSelectDate()
+                .setDateValue(DATE_VALUE);
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
     }
 }

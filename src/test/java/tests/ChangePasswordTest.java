@@ -9,17 +9,16 @@ public class ChangePasswordTest extends BaseTest {
 
     @Test(groups = "regression", description = "Смена пароля")
     public void changePasswordTest() {
-
         loginPage.changeLogin(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("changePassword"));
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickSettingsButton()
-                .isOpenSettingsPage()
-                .clickPasswordButton()
-                .isPasswordDescription()
-                .changePassword(PropertyReader.getProperty("oldPassword"), PropertyReader.getProperty("newPassword"), PropertyReader.getProperty("repeatPassword"), PropertyReader.getProperty("hintPassword"))
-                .isSuccessMessage();
-        dashboardPage.clickLogoutButton()
-                .changeLogin(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("newPassword"));
+        dashboardPage.clickSettingsButton();
+        settingsPage.isOpenSettingsPage();
+        settingsPage.clickPasswordButton();
+        settingsPage.isPasswordDescription();
+        settingsPage.changePassword(PropertyReader.getProperty("oldPassword"), PropertyReader.getProperty("newPassword"), PropertyReader.getProperty("repeatPassword"), PropertyReader.getProperty("hintPassword"));
+        settingsPage.isSuccessMessage();
+        settingsPage.clickLogoutButton();
+        loginPage.changeLogin(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("newPassword"));
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
     }
 

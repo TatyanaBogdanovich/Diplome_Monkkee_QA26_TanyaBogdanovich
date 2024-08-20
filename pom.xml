@@ -43,6 +43,11 @@
             <version>1.18.34</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,7 +81,6 @@
             </plugin>
         </plugins>
     </build>
-
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
@@ -84,6 +88,5 @@
         <selenium.version>4.19.1</selenium.version>
         <aspectj.version>1.9.19</aspectj.version>
         <suiteName>smoke</suiteName>
-        <suiteName>regression</suiteName>
     </properties>
 </project>

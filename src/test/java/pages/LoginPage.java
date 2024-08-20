@@ -10,7 +10,7 @@ public class LoginPage extends BasePage {
 
     private static final By EMAIL_INPUT = By.id("login");
     private static final By PASSWORD_INPUT = By.id("password");
-    private static final By LOGIN_BUTTON = By.xpath("//button//div");
+    private static final By LOGIN_BUTTON = By.xpath("//button[@type='submit']");
     private static final By ERROR_MESSAGE = By.xpath("//div[normalize-space(text()) = 'Mandatory field']");
     private static final By ERROR_LOGIN = By.xpath("//div[@class='alert alert-danger']");
 
@@ -19,13 +19,15 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Заполнить поле User")
-    public void setEmailValue(String email) {
+    public LoginPage setEmailValue(String email) {
         driver.findElement(EMAIL_INPUT).sendKeys(email);
+        return this;
     }
 
     @Step("Заполнить поле Password")
-    public void setPasswordValue(String password) {
+    public LoginPage setPasswordValue(String password) {
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
+        return this;
     }
 
     @Step("Нажать на кнопку Login")
@@ -34,23 +36,25 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Сообщение об ошибке")
-    public void isDisplayMessageError() {
+    public LoginPage isDisplayMessageError() {
         driver.findElement(ERROR_MESSAGE).isDisplayed();
+        return this;
     }
 
     @Step("Сообщение об ошибке")
-    public void isDisplayLoginMessageError() {
+    public LoginPage isDisplayLoginMessageError() {
         driver.findElement(ERROR_LOGIN).isDisplayed();
+        return this;
     }
 
     @Step("Сообщение об ошибке")
     public String getErrorText() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+    return driver.findElement(ERROR_MESSAGE).getText();
     }
 
     @Step("Сообщение об ошибке, при невалидном логине или пароле")
     public String getErrorLoginText() {
-        return driver.findElement(ERROR_LOGIN).getText();
+    return driver.findElement(ERROR_LOGIN).getText();
     }
 
     @Step("Ввести валидные логин и пароль")
@@ -63,7 +67,7 @@ public class LoginPage extends BasePage {
 
     @Step("Логин и пароль для теста на смену пароля")
     public void changeLogin(String changeLogin, String changePassword) {
-        log.debug("changeLogin {} , {}", changeLogin, changePassword);
+        log.info("changeLogin {} , {}", changeLogin, changePassword);
         setEmailValue(changeLogin);
         setPasswordValue(changePassword);
         clickLoginButton();
