@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.PropertyReader;
 
 @Log4j2
 public class LoginPage extends BasePage {
@@ -16,6 +17,11 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    @Step
+    public void open() {
+        driver.get(PropertyReader.getProperty("baseUrl"));
     }
 
     @Step("Заполнить поле User")
@@ -49,27 +55,18 @@ public class LoginPage extends BasePage {
 
     @Step("Сообщение об ошибке")
     public String getErrorText() {
-    return driver.findElement(ERROR_MESSAGE).getText();
+        return driver.findElement(ERROR_MESSAGE).getText();
     }
 
     @Step("Сообщение об ошибке, при невалидном логине или пароле")
     public String getErrorLoginText() {
-    return driver.findElement(ERROR_LOGIN).getText();
+        return driver.findElement(ERROR_LOGIN).getText();
     }
 
     @Step("Ввести валидные логин и пароль")
     public void login(String email, String password) {
-        log.info("Login {} , {}", email, password);
         setEmailValue(email);
         setPasswordValue(password);
-        clickLoginButton();
-    }
-
-    @Step("Логин и пароль для теста на смену пароля")
-    public void changeLogin(String changeLogin, String changePassword) {
-        log.info("changeLogin {} , {}", changeLogin, changePassword);
-        setEmailValue(changeLogin);
-        setPasswordValue(changePassword);
         clickLoginButton();
     }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.time.Duration;
+import java.util.Set;
 
 public class EntriesPage extends BasePage {
 
@@ -21,6 +22,7 @@ public class EntriesPage extends BasePage {
     public static final By DISPLAY_TEXT_INPUT = By.xpath("//label[text()='Display Text']/following-sibling::div//input");
     public static final By URL_ARTICLE_INPUT = By.xpath("//label[text()='URL']/following-sibling::div//input");
     public static final By OK_LINK_BUTTON = By.xpath("//a[@title ='OK']");
+    public static final By PRINT_BUTTON = By.xpath("//a[@title='Print entry']");
 
     public EntriesPage(WebDriver driver) {
         super(driver);
@@ -62,7 +64,6 @@ public class EntriesPage extends BasePage {
     public EntriesPage setSelectFile(String pathImage) {
         driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
         driver.findElement(SELECT_FILE_BUTTON).sendKeys(pathImage);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.switchTo().defaultContent();
         return this;
     }
@@ -108,5 +109,28 @@ public class EntriesPage extends BasePage {
     public EntriesPage clickDeleteButton() {
         driver.findElement(DELETE_BUTTON).click();
         return this;
+    }
+
+    @Step("Нажать кнопку Печать")
+    public EntriesPage clickPrintButton() {
+        driver.findElement(PRINT_BUTTON).click();
+        return this;
+    }
+
+    @Step("Проверка отображения нового окна")
+    public boolean verifyWindowPrint() {
+        // Сохранение текущего окна
+        String mainWindowHandle = driver.getWindowHandle();
+        // Получение всех открытых окон
+        Set<String> allWindowHandles;
+        allWindowHandles = driver.getWindowHandles();
+        // Переключение на новое окно
+        for (String windowHandle : allWindowHandles) {
+            if (!windowHandle.equals(mainWindowHandle)) {
+                driver.switchTo().window(windowHandle);
+                break;
+            }
+        }
+        return allWindowHandles.size() == 2;
     }
 }

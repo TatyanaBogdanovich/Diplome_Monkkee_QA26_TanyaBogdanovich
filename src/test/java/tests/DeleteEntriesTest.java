@@ -2,19 +2,19 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
 
 public class DeleteEntriesTest extends BaseTest {
 
-    @Test(groups = "smoke", description = "Удалить запись")
+    @Test(groups = {"userLogin", "smoke"}, description = "Удалить запись")
     public void deleteEntryTest() {
-
-        loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickCreateEntryButton();
-        entriesPage.setEnterTextInput(ENTER_TEXT_INPUT);
+        Integer countALL = dashboardPage.getCountAllEntries();
+        dashboardPage.findFirstEntry();
+        dashboardPage.clickEditEntry();
         entriesPage.clickDeleteButton();
         entriesPage.acceptAlert();
+        Integer countAfterDelete = dashboardPage.getCountAllEntries();
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+        Assert.assertEquals((countALL -1), countAfterDelete);
     }
 }

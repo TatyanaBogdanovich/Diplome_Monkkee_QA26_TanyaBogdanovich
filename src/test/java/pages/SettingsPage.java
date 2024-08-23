@@ -16,7 +16,7 @@ public class SettingsPage extends BasePage {
     public static final By HINT_PASSWORD = By.xpath("//*[@id='password-hint']");
     public static final By SAVE_BUTTON = By.xpath("//button[@class='btn btn-default']");
     public static final By SUCCESS_MASSAGE = By.xpath(" //div[@class='alert alert-success']");
-    public static final By LOGOUT_BUTTON = By.xpath("//button[@class = 'user-menu__btn']");
+    public static final By LOGOUT_BUTTON = By.xpath("//span[text() ='Logout']");
 
     public SettingsPage(WebDriver driver) {
         super(driver);
@@ -71,13 +71,12 @@ public class SettingsPage extends BasePage {
     }
 
     @Step("Изменить пароль")
-    public SettingsPage changePassword(String oldPassword, String newPassword, String repeatPassword, String hintPassword) {
+    public void changePassword(String oldPassword, String newPassword, String repeatPassword, String hintPassword) {
         setOldPasswordValue(oldPassword);
         setNewPasswordValue(newPassword);
         setRepeatPasswordValue(repeatPassword);
         setHintPasswordValue(hintPassword);
         clickSaveButton();
-        return this;
     }
 
     @Step("Сообщение об успешном изменении пароля")
@@ -86,8 +85,9 @@ public class SettingsPage extends BasePage {
         return driver.findElement(SUCCESS_MASSAGE).isDisplayed();
     }
     @Step ("Нажать кнопку Logout")
-    public LoginPage clickLogoutButton() {
+    public void clickLogoutButton() throws InterruptedException {
+       //явное ожидание в данном методе не помогает
+        Thread.sleep(3000);
         driver.findElement(LOGOUT_BUTTON).click();
-        return new LoginPage(driver);
     }
 }

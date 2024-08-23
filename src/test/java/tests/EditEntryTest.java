@@ -2,17 +2,14 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
 
 public class EditEntryTest extends BaseTest {
 
     public static String LINK_ENTRY = "https://m.realt.by/news/article/40463/";
-    public static String DISPLAY_TEXT = "Ссылка на статью. ";
+    public static String DISPLAY_TEXT = "Ссылка. ";
 
-    @Test(groups = "smoke", description = "Редактировать запись")
+    @Test(groups = {"userLogin", "smoke"}, description = "Редактировать запись")
     public void editEntryTest() {
-
-        loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         dashboardPage.isDashboardDisplayed();
         String firstText = dashboardPage.getCheckEntry();
         dashboardPage.findFirstEntry();

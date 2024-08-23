@@ -11,13 +11,14 @@ import java.time.Duration;
 
 @Log4j2
 public abstract class BasePage {
+
     protected WebDriver driver;
     protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         log.info("Webdriver is {}", driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     @Step("alert")

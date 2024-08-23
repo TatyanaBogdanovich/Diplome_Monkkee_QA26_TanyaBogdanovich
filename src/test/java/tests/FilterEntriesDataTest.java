@@ -2,29 +2,28 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.PropertyReader;
 
 public class FilterEntriesDataTest extends BaseTest {
 
-    public static String DATE_VALUE = "16/15/2024";
+    public static String DATE_VALUE = "16/99/2024";
 
-    @Test(groups = "regression", description = "Установить фильтр записей по дате")
+    @Test(groups = {"userLogin", "smoke"}, description = "Установка и сброс фильтра по дате")
     public void positiveFilterDateTest() {
-        loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
+        String calendar = "16";
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickSelectDate()
-                .clickSelectDay()
-                .getEntriesDate()
-                .clickResetFilter();
-                Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+        dashboardPage.clickSelectDate();
+        dashboardPage.clickSelectDayInCalendar(calendar);
+        dashboardPage.clickResetFilter();
+        Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+        Assert.assertFalse(dashboardPage.isResetButtonVisible());
     }
 
-    @Test(groups = "negative", description = "Установить невалидную дату в фильтр")
+    @Test(groups = {"userLogin", "negative"}, description = "Установить невалидную дату в фильтр")
     public void negativeFilterDateTest() {
-        loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         dashboardPage.isDashboardDisplayed();
         dashboardPage.clickSelectDate()
                 .setDateValue(DATE_VALUE);
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
+        Assert.assertFalse(dashboardPage.isEntriesDateDisplayed());
     }
 }

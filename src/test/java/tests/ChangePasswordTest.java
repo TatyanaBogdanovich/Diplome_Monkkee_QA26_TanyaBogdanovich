@@ -7,9 +7,9 @@ import utils.PropertyReader;
 
 public class ChangePasswordTest extends BaseTest {
 
-    @Test(groups = "regression", description = "Смена пароля")
-    public void changePasswordTest() {
-        loginPage.changeLogin(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("changePassword"));
+    @Test(groups = {"regression"}, description = "Смена пароля")
+    public void changePasswordTest() throws InterruptedException {
+        loginPage.login(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("changePassword"));
         dashboardPage.isDashboardDisplayed();
         dashboardPage.clickSettingsButton();
         settingsPage.isOpenSettingsPage();
@@ -18,13 +18,12 @@ public class ChangePasswordTest extends BaseTest {
         settingsPage.changePassword(PropertyReader.getProperty("oldPassword"), PropertyReader.getProperty("newPassword"), PropertyReader.getProperty("repeatPassword"), PropertyReader.getProperty("hintPassword"));
         settingsPage.isSuccessMessage();
         settingsPage.clickLogoutButton();
-        loginPage.changeLogin(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("newPassword"));
+        loginPage.login(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("newPassword"));
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
     }
 
     @AfterMethod(alwaysRun = true)
     public void setOldPassword() {
-
         dashboardPage.clickSettingsButton()
                 .isOpenSettingsPage()
                 .clickPasswordButton()
