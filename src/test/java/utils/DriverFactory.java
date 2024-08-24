@@ -3,8 +3,8 @@ package utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 import java.time.Duration;
 
@@ -21,14 +21,14 @@ public class DriverFactory {
                 options.addArguments("--disable-notifications");
                 driver = new ChromeDriver(options);
             }
-            case "edge"-> {
-                EdgeOptions options = new EdgeOptions();
+            case "firefox"-> {
+                FirefoxOptions options = new FirefoxOptions();
                 //options.addArguments("--headless");
                 options.addArguments("--disable-extensions");
                 options.addArguments("--disable-infobars");
                 options.addArguments("--disable-popup-blocking");
                 options.addArguments("--disable-notifications");
-                driver = new EdgeDriver(options);
+                driver = new FirefoxDriver(options);
             }
             default -> throw new  Exception("Unexpected value: " + browserName);
         }

@@ -8,9 +8,8 @@
                 <include name="regression"/>
             </run>
         </groups>
-        <classes>
-            <class name="tests.ChangePasswordTest"/>
-            <class name="tests.FilterEntriesDataTest"/>
-        </classes>
+        <packages>
+            <package name="tests"/>
+        </packages>
     </test>
 </suite>

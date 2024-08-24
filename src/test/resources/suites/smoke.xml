@@ -1,29 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
 <suite name="Smoke test" parallel="tests" thread-count="2">
-    <test name="Test on chrome">
+    <test name="Test">
         <parameter name="browserName" value="chrome"/>
         <groups>
             <run>
                 <include name="smoke"/>
             </run>
         </groups>
-        <classes>
-            <class name="tests.LoginTest"/>
-            <class name="tests.EditEntryTest"/>
-        </classes>
-    </test>
-    <test name="Test on Microsoft Edge">
-        <parameter name="browserName" value="edge"/>
-        <groups>
-            <run>
-                <include name="smoke"/>
-            </run>
-        </groups>
-        <classes>
-            <class name="tests.CreateEntryTest"/>
-            <class name="tests.DeleteEntriesTest"/>
-        </classes>
+        <packages>
+            <package name="tests"/>
+        </packages>
     </test>
 </suite>
