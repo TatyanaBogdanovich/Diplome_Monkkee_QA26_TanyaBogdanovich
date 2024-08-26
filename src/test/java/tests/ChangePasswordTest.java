@@ -11,7 +11,7 @@ public class ChangePasswordTest extends BaseTest {
     public void changePasswordTest() throws InterruptedException {
         loginPage.login(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("changePassword"));
         dashboardPage.isDashboardDisplayed();
-        dashboardPage.clickSettingsButton();
+       dashboardPage.clickSettingsButton();
         settingsPage.isOpenSettingsPage();
         settingsPage.clickPasswordButton();
         settingsPage.isPasswordDescription();
@@ -24,8 +24,8 @@ public class ChangePasswordTest extends BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void setOldPassword() {
-        dashboardPage.clickSettingsButton()
-                .isOpenSettingsPage()
+        dashboardPage.clickSettingsButton();
+        settingsPage.isOpenSettingsPage()
                 .clickPasswordButton()
                 .isPasswordDescription()
                 .changePassword(PropertyReader.getProperty("newPassword"), PropertyReader.getProperty("oldPassword"), PropertyReader.getProperty("oldPassword"), PropertyReader.getProperty("hintPassword"));

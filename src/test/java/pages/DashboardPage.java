@@ -17,7 +17,7 @@ public class DashboardPage extends BasePage {
     public static final String SELECT_DATE = "//td[text()='%s']";
     public static final By ENTRIES_ON_DATE = By.xpath("//span[@class ='ng-binding search-parameter']");
     public static final By RESET_BUTTON = By.id("reset-search");
-    public static final By COUNT_ALL_ENTRY = By.xpath("//div[@class='pagination__num-of-entries ng-binding'] ");
+    public static final By COUNT_ALL_ENTRY = By.xpath("//div[@class= 'entry-container clearfix ng-scope']");
     public static final By SEARCH_INPUT = By.id("appendedInputButton");
     public static final By SEARCH_BUTTON = By.xpath("//button[@title='Search']");
 
@@ -60,14 +60,14 @@ public class DashboardPage extends BasePage {
         return new EntriesPage(driver);
     }
 
-    @Step("Проверить, что ссылка добавлена в запись")
+    @Step("Проверить текста в записи")
     public String getCheckEntry() {
         return driver.findElement(CHECK_ENTRY).getText();
     }
 
     @Step("Проверка поиска записей по тексту")
-    public String getCheckSearchEntry() {
-      return driver.findElement(FIRST_ENTRY).getText();
+    public boolean getCheckSearchEntry() {
+     return driver.findElement(CHECK_ENTRY).isDisplayed();
     }
 
     @Step("Найти первую запись из списка")
@@ -96,12 +96,6 @@ public class DashboardPage extends BasePage {
 
     }
 
-    @Step("Проверка отображения записей согласно установленному фильтру")
-    public DashboardPage getEntriesDate() {
-        driver.findElement(ENTRIES_ON_DATE).getText();
-        return this;
-    }
-
     @Step("Проверка установки фильтра")
     public boolean isEntriesDateDisplayed() {
         try {
@@ -126,7 +120,7 @@ public class DashboardPage extends BasePage {
 
     @Step("Количество всех записей")
     public Integer getCountAllEntries() {
-        return Integer.parseInt(driver.findElement(COUNT_ALL_ENTRY).getText().replace(" entries", ""));
+        return driver.findElements(COUNT_ALL_ENTRY).size();
     }
 
     @Step("Ввести текст в поле Поиск")

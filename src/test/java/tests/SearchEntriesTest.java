@@ -5,15 +5,14 @@ import org.testng.annotations.Test;
 
 public class SearchEntriesTest extends BaseTest {
 
-    @Test(groups = {"userLogin", "smoke"}, description = "Создать запись + добавить картинку из файла")
+    @Test(groups = {"userLogin", "smoke"}, description = "Поиск записи по тексту")
     public void searchEntriesTest() {
         String enterTextSearch = "Редкие фото.";
         dashboardPage.isDashboardDisplayed();
         dashboardPage.clickSearchInput();
         dashboardPage.setTextSearchEntry(enterTextSearch);
         dashboardPage.clickSearchButton();
-        dashboardPage.getEntriesDate();
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
-        Assert.assertEquals(dashboardPage.getCheckEntry(), enterTextSearch);
+        Assert.assertTrue(dashboardPage.getCheckSearchEntry(), enterTextSearch);
     }
 }

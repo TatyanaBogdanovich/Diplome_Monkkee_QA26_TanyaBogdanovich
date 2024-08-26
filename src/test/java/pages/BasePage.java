@@ -18,7 +18,7 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         log.info("Webdriver is {}", driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     @Step("alert")

@@ -5,9 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.time.Duration;
-import java.util.Set;
-
 public class EntriesPage extends BasePage {
 
     public static final By ENTER_TEXT_INPUT = By.id("editable");
@@ -23,6 +20,8 @@ public class EntriesPage extends BasePage {
     public static final By URL_ARTICLE_INPUT = By.xpath("//label[text()='URL']/following-sibling::div//input");
     public static final By OK_LINK_BUTTON = By.xpath("//a[@title ='OK']");
     public static final By PRINT_BUTTON = By.xpath("//a[@title='Print entry']");
+    public static final By INPUT_CONTAINER = By.xpath("//table[@class='cke_dialog_ui_hbox cke_dialog_image_url']");
+
 
     public EntriesPage(WebDriver driver) {
         super(driver);
@@ -37,7 +36,6 @@ public class EntriesPage extends BasePage {
 
     @Step("Нажать кнопку HOME")
     public EntriesPage clickHomeButton() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(HOME_BUTTON));
         driver.findElement(HOME_BUTTON).click();
         return this;
     }
@@ -50,6 +48,7 @@ public class EntriesPage extends BasePage {
 
     @Step("Нажать кнопку Image")
     public EntriesPage clickImageButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_IMAGE_BUTTON));
         driver.findElement(ADD_IMAGE_BUTTON).click();
         return this;
     }
@@ -63,6 +62,7 @@ public class EntriesPage extends BasePage {
     @Step("Выбрать картинку из файла")
     public EntriesPage setSelectFile(String pathImage) {
         driver.switchTo().frame(driver.findElement(By.cssSelector("iframe")));
+
         driver.findElement(SELECT_FILE_BUTTON).sendKeys(pathImage);
         driver.switchTo().defaultContent();
         return this;
@@ -70,6 +70,7 @@ public class EntriesPage extends BasePage {
 
     @Step("Нажать кнопку OK")
     public EntriesPage clickUploadButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(UPLOAD_BUTTON_OK));
         driver.findElement(UPLOAD_BUTTON_OK).click();
         return this;
     }
@@ -100,7 +101,6 @@ public class EntriesPage extends BasePage {
 
     @Step("Нажать кнопку OK")
     public EntriesPage clickOkLinkButton() {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.findElement(OK_LINK_BUTTON).click();
         return this;
     }
@@ -112,25 +112,8 @@ public class EntriesPage extends BasePage {
     }
 
     @Step("Нажать кнопку Печать")
-    public EntriesPage clickPrintButton() {
+    public void clickPrintButton() {
         driver.findElement(PRINT_BUTTON).click();
-        return this;
-    }
 
-    @Step("Проверка отображения нового окна")
-    public boolean verifyWindowPrint() {
-        // Сохранение текущего окна
-        String mainWindowHandle = driver.getWindowHandle();
-        // Получение всех открытых окон
-        Set<String> allWindowHandles;
-        allWindowHandles = driver.getWindowHandles();
-        // Переключение на новое окно
-        for (String windowHandle : allWindowHandles) {
-            if (!windowHandle.equals(mainWindowHandle)) {
-                driver.switchTo().window(windowHandle);
-                break;
-            }
-        }
-        return allWindowHandles.size() == 2;
     }
 }

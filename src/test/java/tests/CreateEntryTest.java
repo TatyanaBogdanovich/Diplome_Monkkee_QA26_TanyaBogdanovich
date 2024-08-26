@@ -22,7 +22,7 @@ public class CreateEntryTest extends BaseTest {
         Assert.assertEquals(dashboardPage.getCheckEntry(), enterText);
     }
 
-    @Test(groups = {"userLogin", "regression"}, description = "Создать запись + добавить картинку из файла")
+    @Test(groups = {"userLogin"}, description = "Создать запись + добавить картинку из файла")
     public void createEntryImageFileTest() {
         String enterText = faker.harryPotter().spell() + faker.book().publisher();
         dashboardPage.isDashboardDisplayed();

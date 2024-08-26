@@ -3,11 +3,13 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.PropertyReader;
 
 public class LoginTest extends BaseTest {
 
-    @Test(groups = {"userLogin", "regression", "smoke"}, description = "Успешная авторизация в приложении")
+    @Test(groups = {"regression", "smoke"}, description = "Успешная авторизация в приложении")
     public void positiveLoginTest() {
+        loginPage.login(PropertyReader.getProperty("login"), PropertyReader.getProperty("password"));
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
     }
 

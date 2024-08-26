@@ -18,6 +18,7 @@ public abstract class BaseTest {
     protected DashboardPage dashboardPage;
     protected SettingsPage settingsPage;
     protected EntriesPage entriesPage;
+    protected NewWindowPage newWindowPage;
     static Faker faker = new Faker();
 
     @BeforeMethod(alwaysRun = true)
@@ -29,6 +30,7 @@ public abstract class BaseTest {
         this.dashboardPage = new DashboardPage(driver);
         this.settingsPage = new SettingsPage(driver);
         this.entriesPage = new EntriesPage(driver);
+        this.newWindowPage = new NewWindowPage(driver);
 
         loginPage.open();
     }

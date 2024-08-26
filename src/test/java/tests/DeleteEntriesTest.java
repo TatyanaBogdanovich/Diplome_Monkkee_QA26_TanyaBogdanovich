@@ -15,6 +15,6 @@ public class DeleteEntriesTest extends BaseTest {
         entriesPage.acceptAlert();
         Integer countAfterDelete = dashboardPage.getCountAllEntries();
         Assert.assertTrue(dashboardPage.isDashboardDisplayed());
-        Assert.assertEquals((countALL -1), countAfterDelete);
+        Assert.assertEquals((countALL - 1), countAfterDelete);
     }
 }

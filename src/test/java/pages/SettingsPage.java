@@ -71,12 +71,13 @@ public class SettingsPage extends BasePage {
     }
 
     @Step("Изменить пароль")
-    public void changePassword(String oldPassword, String newPassword, String repeatPassword, String hintPassword) {
+    public SettingsPage changePassword(String oldPassword, String newPassword, String repeatPassword, String hintPassword) {
         setOldPasswordValue(oldPassword);
         setNewPasswordValue(newPassword);
         setRepeatPasswordValue(repeatPassword);
         setHintPasswordValue(hintPassword);
         clickSaveButton();
+        return this;
     }
 
     @Step("Сообщение об успешном изменении пароля")
@@ -84,9 +85,10 @@ public class SettingsPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(SUCCESS_MASSAGE));
         return driver.findElement(SUCCESS_MASSAGE).isDisplayed();
     }
-    @Step ("Нажать кнопку Logout")
+
+    @Step("Нажать кнопку Logout")
     public void clickLogoutButton() throws InterruptedException {
-       //явное ожидание в данном методе не помогает
+        //wait.until(ExpectedConditions.elementToBeClickable(LOGOUT_BUTTON)).click();
         Thread.sleep(3000);
         driver.findElement(LOGOUT_BUTTON).click();
     }
