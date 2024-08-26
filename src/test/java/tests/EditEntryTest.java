@@ -11,7 +11,7 @@ public class EditEntryTest extends BaseTest {
     @Test(groups = {"userLogin", "smoke"}, description = "Редактировать запись")
     public void editEntryTest() {
         dashboardPage.isDashboardDisplayed();
-        String firstText = dashboardPage.getCheckEntry();
+        String firstText = dashboardPage.getCheckEntryText();
         dashboardPage.findFirstEntry();
         dashboardPage.clickEditEntry();
         entriesPage.clickEditEntryTable();
@@ -21,6 +21,6 @@ public class EditEntryTest extends BaseTest {
         entriesPage.setArticleLinkInput(LINK_ENTRY);
         entriesPage.clickOkLinkButton();
         entriesPage.clickHomeButton();
-        Assert.assertEquals(dashboardPage.getCheckEntry(), DISPLAY_TEXT + firstText);
+        Assert.assertEquals(dashboardPage.getCheckEntryText(), DISPLAY_TEXT + firstText);
     }
 }

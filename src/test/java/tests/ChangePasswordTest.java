@@ -8,7 +8,7 @@ import utils.PropertyReader;
 public class ChangePasswordTest extends BaseTest {
 
     @Test(groups = {"regression"}, description = "Смена пароля")
-    public void changePasswordTest() throws InterruptedException {
+    public void changePasswordTest() {
         loginPage.login(PropertyReader.getProperty("changeLogin"), PropertyReader.getProperty("changePassword"));
         dashboardPage.isDashboardDisplayed();
        dashboardPage.clickSettingsButton();

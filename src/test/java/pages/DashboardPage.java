@@ -61,7 +61,7 @@ public class DashboardPage extends BasePage {
     }
 
     @Step("Проверить текста в записи")
-    public String getCheckEntry() {
+    public String getCheckEntryText() {
         return driver.findElement(CHECK_ENTRY).getText();
     }
 

@@ -6,12 +6,13 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Set;
 
-public class NewWindowPage extends BasePage {
+public class PrintEntryPage extends BasePage {
 
     public static final By DATE_ENTRY = By.xpath("//div[normalize-space()][3]");
     public static final By TEXT_ENTRY = By.xpath("//p[normalize-space()]");
 
-    public NewWindowPage(WebDriver driver) {
+
+    public PrintEntryPage(WebDriver driver) {
         super(driver);
     }
 
@@ -34,12 +35,12 @@ public class NewWindowPage extends BasePage {
     }
 
     @Step("Проверка отображения даты записи в новом окне")
-    public String isDateEntryDisplayed() {
+    public String getDateEntryText() {
         return DATE_ENTRY.findElement(driver).getText();
     }
 
     @Step("Проверка отображения текста записи в новом окне")
-    public String isTextEntryDisplayed() {
+    public String getEntryText() {
         return TEXT_ENTRY.findElement(driver).getText();
     }
 

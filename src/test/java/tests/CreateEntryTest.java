@@ -19,7 +19,7 @@ public class CreateEntryTest extends BaseTest {
         entriesPage.setUrlImage(URL_IMAGE);
         entriesPage.clickUploadButton();
         entriesPage.clickHomeButton();
-        Assert.assertEquals(dashboardPage.getCheckEntry(), enterText);
+        Assert.assertEquals(dashboardPage.getCheckEntryText(), enterText);
     }
 
     @Test(groups = {"userLogin"}, description = "Создать запись + добавить картинку из файла")
@@ -32,7 +32,7 @@ public class CreateEntryTest extends BaseTest {
         entriesPage.setSelectFile(PATH_IMAGE);
         entriesPage.clickUploadButton();
         entriesPage.clickHomeButton();
-        Assert.assertEquals(dashboardPage.getCheckEntry(), enterText);
+        Assert.assertEquals(dashboardPage.getCheckEntryText(), enterText);
     }
 
     @Test(groups = {"userLogin", "negative"}, description = "Негативный тест добавить файл в формате PDF (не поддерживаемый)")

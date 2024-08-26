@@ -1,8 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SettingsPage extends BasePage {
@@ -87,9 +86,14 @@ public class SettingsPage extends BasePage {
     }
 
     @Step("Нажать кнопку Logout")
-    public void clickLogoutButton() throws InterruptedException {
-        //wait.until(ExpectedConditions.elementToBeClickable(LOGOUT_BUTTON)).click();
-        Thread.sleep(3000);
-        driver.findElement(LOGOUT_BUTTON).click();
+    public void clickLogoutButton() {
+        try {
+            driver.findElement(LOGOUT_BUTTON).click();
+        } catch (Exception exception) {
+            try {
+                driver.findElement(LOGOUT_BUTTON).click();
+            } catch (Exception exception1) {
+            }
+        }
     }
 }

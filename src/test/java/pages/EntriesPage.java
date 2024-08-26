@@ -20,8 +20,8 @@ public class EntriesPage extends BasePage {
     public static final By URL_ARTICLE_INPUT = By.xpath("//label[text()='URL']/following-sibling::div//input");
     public static final By OK_LINK_BUTTON = By.xpath("//a[@title ='OK']");
     public static final By PRINT_BUTTON = By.xpath("//a[@title='Print entry']");
-    public static final By INPUT_CONTAINER = By.xpath("//table[@class='cke_dialog_ui_hbox cke_dialog_image_url']");
-
+    public static final String MAIN_DATE_ENTRY = ("//time[@class = 'ng-binding']");
+    public static final String MAIN_TEXT_ENTRY = ("//p[normalize-space()][1]");
 
     public EntriesPage(WebDriver driver) {
         super(driver);
@@ -114,6 +114,15 @@ public class EntriesPage extends BasePage {
     @Step("Нажать кнопку Печать")
     public void clickPrintButton() {
         driver.findElement(PRINT_BUTTON).click();
+    }
 
+    @Step("Проверка отображения даты записи в главном окне")
+    public String getDateEntryMainWindowText() {
+        return driver.findElement(By.xpath(MAIN_DATE_ENTRY)).getText();
+    }
+
+    @Step("Проверка отображения текста записи в главном окне")
+    public String getEntryMainWindowText() {
+        return driver.findElement(By.xpath(MAIN_TEXT_ENTRY)).getText();
     }
 }
