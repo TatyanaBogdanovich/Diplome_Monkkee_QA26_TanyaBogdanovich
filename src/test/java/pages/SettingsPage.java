@@ -86,13 +86,14 @@ public class SettingsPage extends BasePage {
     }
 
     @Step("Нажать кнопку Logout")
-    public void clickLogoutButton() {
+    public void clickLogoutButton() throws Exception {
         try {
             driver.findElement(LOGOUT_BUTTON).click();
-        } catch (Exception exception) {
+        } catch (ElementClickInterceptedException interceptedException) {
             try {
                 driver.findElement(LOGOUT_BUTTON).click();
-            } catch (Exception exception1) {
+            } catch (Exception generalException) {
+                throw new Exception("Can't click logout button", generalException);
             }
         }
     }
